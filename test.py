@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import pickle
 
-
+import asr_evaluation as eval
 
 mfcc_test_path = "./features/mfcc/test/timit.hdf"
 mfcc_delta_test_path = "./features/mfcc_delta/test/timit.hdf"
@@ -21,8 +21,8 @@ def main(delta, energy_coeff, models_path):
     test_features, test_labels = extracting_features_labels(delta, energy_coeff)
     models_dict = load_models(models_path)
 
-    fer = testing(test_features, test_labels, models_dict)
-    print(models_path, " ===== ", fer)
+    fla, per = testing(test_features, test_labels, models_dict)
+    print(models_path, " ===== ", fla, "  ", per*100)
 
 
 
@@ -53,6 +53,7 @@ def load_models(path):
 
     with open(path, "rb") as f:
         model = pickle.load(f)
+
     return model
 
 
@@ -73,7 +74,7 @@ def testing(test_features, test_labels, models_dict):
     for idx in pred_indices:
         pred_labels.append(labels_list[idx])
 
-    return get_accuracy(test_labels, np.array(pred_labels))
+    return get_accuracy(test_labels, np.array(pred_labels)), eval.main(pred_labels, test_labels.tolist())
 
 
 
@@ -87,6 +88,8 @@ def get_accuracy(test_labels, pred_labels):
 
 
 if __name__ == '__main__':
+
+    print("              Model                          FLA                   PER")
 
     for dirName, subdirList, fileList in os.walk(dump_file_path):
 
