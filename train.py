@@ -12,7 +12,7 @@ mfcc_delta_delta_train_path = "./features/mfcc_delta_delta/train/timit.hdf"
 delta_list = [0, 1, 2]
 train_path_list = [mfcc_train_path, mfcc_delta_train_path, mfcc_delta_delta_train_path]
 
-dump_file_path = "./Models"
+dump_file_path = "./models"
 
 
 

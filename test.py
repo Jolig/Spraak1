@@ -9,7 +9,7 @@ mfcc_test_path = "./features/mfcc/test/timit.hdf"
 mfcc_delta_test_path = "./features/mfcc_delta/test/timit.hdf"
 mfcc_delta_delta_test_path = "./features/mfcc_delta_delta/test/timit.hdf"
 
-dump_file_path = "./Models"
+dump_file_path = "./models"
 
 delta_list = [0, 1, 2]
 test_path_list = [mfcc_test_path, mfcc_delta_test_path, mfcc_delta_delta_test_path]
